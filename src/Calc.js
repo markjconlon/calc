@@ -11,9 +11,24 @@ class Calc extends Component {
   changeResult(e){
     let firstNum = parseInt(document.getElementById('first').value);
     let secondNum = parseInt(document.getElementById('second').value);
-    this.setState({
-      result: (firstNum + secondNum)
-    });
+    let operator = document.getElementById('operator').value
+    if (operator === "-") {
+      this.setState({
+        result: (firstNum - secondNum)
+      });
+    } else if (operator === "*") {
+      this.setState({
+        result: (firstNum * secondNum)
+      });
+    } else if (operator === "/") {
+      this.setState({
+        result: (firstNum / secondNum)
+      });
+    } else {
+      this.setState({
+        result: (firstNum + secondNum)
+      });
+    }
   }
   render() {
     let displayedResult = ""
@@ -24,11 +39,16 @@ class Calc extends Component {
     }
     return(
       <div className="container">
-        <h1>Add with React!</h1>
+        <h1>Calculate with React!</h1>
 
         <div onChange={(e) => this.changeResult(e)} className= "add">
           <input id="first" type="text" />
-          <span>+</span>
+          <select id="operator">
+            <option value="+"> + </option>
+            <option value="-"> - </option>
+            <option value="*"> * </option>
+            <option value="/"> / </option>
+          </select>
           <input id="second" type="text" />
           <span>=</span>
           <h3>{displayedResult}</h3>
